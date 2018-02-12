@@ -1030,6 +1030,7 @@ class Select extends React.Component {
 				selectValue: this.selectValue,
 				valueArray,
 				valueKey: this.props.valueKey,
+				menuRef: ref => this.menu = ref
 			});
 		} else if (this.props.noResultsText) {
 			return (
@@ -1107,7 +1108,6 @@ class Select extends React.Component {
 					id={`${this._instancePrefix}-list`}
 					onMouseDown={this.handleMouseDownOnMenu}
 					onScroll={this.handleMenuScroll}
-					ref={ref => this.menu = ref}
 					role="listbox"
 					style={this.props.menuStyle}
 					tabIndex={-1}

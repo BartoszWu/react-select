@@ -18,41 +18,49 @@ const menuRenderer = ({
 	selectValue,
 	valueArray,
 	valueKey,
+	menuRef,
 }) => {
 	let Option = optionComponent;
 
-	return options.map((option, i) => {
-		let isSelected = valueArray && valueArray.some(x => x[valueKey] === option[valueKey]);
-		let isFocused = option === focusedOption;
-		let optionClass = classNames(optionClassName, {
-			'Select-option': true,
-			'is-selected': isSelected,
-			'is-focused': isFocused,
-			'is-disabled': option.disabled,
-		});
+	return(
+		<div
+			ref={menuRef}
+      className="Select-menu"
+		>
+			{options.map((option, i) => {
+				let isSelected = valueArray && valueArray.some(x => x[valueKey] === option[valueKey]);
+				let isFocused = option === focusedOption;
+				let optionClass = classNames(optionClassName, {
+					'Select-option': true,
+					'is-selected': isSelected,
+					'is-focused': isFocused,
+					'is-disabled': option.disabled,
+				});
 
-		return (
-			<Option
-				className={optionClass}
-				focusOption={focusOption}
-				inputValue={inputValue}
-				instancePrefix={instancePrefix}
-				isDisabled={option.disabled}
-				isFocused={isFocused}
-				isSelected={isSelected}
-				key={`option-${i}-${option[valueKey]}`}
-				onFocus={onFocus}
-				onSelect={onSelect}
-				option={option}
-				optionIndex={i}
-				ref={ref => { onOptionRef(ref, isFocused); }}
-				removeValue={removeValue}
-				selectValue={selectValue}
-			>
-				{optionRenderer(option, i, inputValue)}
-			</Option>
-		);
-	});
+				return (
+					<Option
+						className={optionClass}
+						focusOption={focusOption}
+						inputValue={inputValue}
+						instancePrefix={instancePrefix}
+						isDisabled={option.disabled}
+						isFocused={isFocused}
+						isSelected={isSelected}
+						key={`option-${i}-${option[valueKey]}`}
+						onFocus={onFocus}
+						onSelect={onSelect}
+						option={option}
+						optionIndex={i}
+						ref={ref => { onOptionRef(ref, isFocused); }}
+						removeValue={removeValue}
+						selectValue={selectValue}
+					>
+						{optionRenderer(option, i, inputValue)}
+					</Option>
+				);
+			})}
+		</div>
+	);
 };
 
 menuRenderer.propTypes = {
@@ -60,6 +68,7 @@ menuRenderer.propTypes = {
 	focusedOption: PropTypes.object,
 	inputValue: PropTypes.string,
 	instancePrefix: PropTypes.string,
+	menuRef: React.PropTypes.func,
 	onFocus: PropTypes.func,
 	onOptionRef: PropTypes.func,
 	onSelect: PropTypes.func,

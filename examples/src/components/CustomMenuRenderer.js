@@ -23,7 +23,6 @@ const menuRendererFunction = function(reactSelectProps) {
         background: 'white',
         border: '1px solid black'
       }}
-      className="Select-menu"
       >
         {menuRenderer(reactSelectProps)}
       </div>
